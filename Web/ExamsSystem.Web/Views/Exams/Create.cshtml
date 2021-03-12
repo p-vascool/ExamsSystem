@@ -1,0 +1,49 @@
+﻿@model ExamsSystem.Web.ViewModels.Exams.ExamCreateViewModel
+
+@{
+    this.ViewData["Title"] = "Exams";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<section>
+    <h2>Create New Exam</h2>
+    <form asp-controller="Exams" method="post">
+        <p>
+            <label for="Name">Name</label>
+            <input type="text" name="Name" asp-for="Exam.Name">
+        </p>
+        <p>
+            <label for="Desctiption">Desctiption</label>
+            <input type="text" name="Desctiption" asp-for="Exam.Description">
+        </p>
+        <p>
+            <label for="Desctiption">Timer</label>
+            <input type="time" name="Timer" asp-for="Exam.ExamTimer"
+                   min="09:00" max="18:00" required>
+        </p>
+        @foreach (var question in Model.Exam.Questions)
+        {
+
+            <table>
+                <thead>
+                    <tr>
+                        <input type="text" name="Question" />
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var answe in question)
+                    {
+                        <tr>
+                            <td>The table body</td>
+                            <td>with two columns</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+        <input type="submit" class="btn btn-primary" value="Insert new" />
+    </form>
+</section>
