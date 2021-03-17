@@ -10,6 +10,7 @@
     {
         public Exam()
         {
+            this.Questions = new List<ExamQuestion>();
         }
 
         public int Id { get; set; }
@@ -26,7 +27,7 @@
 
         public DateTime ExamTimer { get; set; }
 
-        public ICollection<ExamQuestion> Questions { get; set; }
+        public List<ExamQuestion> Questions { get; set; }
 
         public bool HasNegativePoint { get; set; }
 

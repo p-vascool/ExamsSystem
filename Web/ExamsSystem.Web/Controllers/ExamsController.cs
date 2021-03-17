@@ -29,20 +29,34 @@
             return this.View(model);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create(ExamCreateViewModel model)
         {
-            var model = new ExamCreateViewModel();
-            return this.View(model);
-        }
-
-        public async Task<IActionResult> InsertExam(ExamCreateViewModel model)
-        {
-            var exam = new Exam() { Name = model.Name , Description = model.Description, CreatedOn = DateTime.UtcNow };
+            var exam = new Exam() { Name = model.Name, Description = model.Description, CreatedOn = DateTime.UtcNow };
 
             await this.repository.AddAsync(exam);
             await this.repository.SaveChangesAsync();
+            return this.RedirectToAction("InsertExam", model);
+        }
 
-            return this.RedirectToAction(nameof(this.All));
+        public IActionResult CreateAnswer(ExamCreateViewModel model)
+        {
+            model.InitQuestions();
+            this.examsService.AssignAnswer(model.CurrentQuestion, model.CurrentAnswer);
+            this.examsService.AssignQuestion(model.Exam, model.CurrentQuestion);
+            model.AllQuestions.Add(model.CurrentQuestion);
+
+            return this.View("InsertExam", model);
+        }
+
+        public IActionResult InsertExam(ExamCreateViewModel model)
+        {
+            if (model.Exam == null)
+            {
+                model = new ExamCreateViewModel();
+                model.InitQuestions();
+            }
+
+            return this.View(model);
         }
     }
 }

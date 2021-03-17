@@ -18,6 +18,43 @@
             this.examRepository = examRepository;
         }
 
+        public bool AssignAnswer(ExamQuestion question, ExamAnswer answer)
+        {
+            bool isOk = false;
+
+            try
+            {
+                question.Answers.Add(answer);
+                isOk = true;
+            }
+            catch (Exception ex)
+            {
+                isOk = false;
+                throw ex;
+            }
+
+            return isOk;
+        }
+
+        public bool AssignQuestion(Exam exam, ExamQuestion question)
+        {
+            bool isOk = false;
+
+            try
+            {
+                exam.Questions.Add(question);
+                isOk = true;
+            }
+            catch (Exception ex)
+            {
+                isOk = false;
+                throw ex;
+            }
+
+            return isOk;
+
+        }
+
         public bool CreateNewExam(Exam exam)
         {
             return exam.CreateExam();

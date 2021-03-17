@@ -6,7 +6,7 @@
 
 <h1>@this.ViewData["Title"]</h1>
 
-    <h2>AllExanms</h2>
+    <h2>AllExams</h2>
 
 @foreach (var exam in this.Model.Exams)
 {
@@ -15,4 +15,4 @@
     <div>Description: @exam.Description</div>
     <div>Created On: @exam.CreatedOn</div>
 }
-<a asp-action="Create" class="btn btn-primary">Insert new</a>
+<a asp-action="InsertExam" class="btn btn-primary">Insert new</a>

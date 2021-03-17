@@ -10,6 +10,7 @@
 
         public ExamQuestion()
         {
+            this.Answers = new List<ExamAnswer>();
         }
 
         public int Id { get; set; }

@@ -11,5 +11,9 @@
         bool CreateNewExam(Exam exam);
 
         IEnumerable<T> GetAll<T>();
+
+        bool AssignQuestion(Exam exam, ExamQuestion question);
+
+        bool AssignAnswer(ExamQuestion question, ExamAnswer answer);
     }
 }
